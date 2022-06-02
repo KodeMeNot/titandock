@@ -7,7 +7,7 @@ services:
   api:
     container_name: titanApi
     restart: always
-    image: "vishaltechnative/titandef:api0.2"
+    image: "vishaltechnative/titandef:api0.5"
     ports:
       - "9000:9000"
 
@@ -15,7 +15,7 @@ services:
   # UI Container
   ##############################
   ui:
-    image: "vishaltechnative/titandef:app0.2"
+    image: "vishaltechnative/titandef:app0.6"
     restart: always
     container_name: ui
     ports:
@@ -23,9 +23,9 @@ services:
       - "443:443"
     depends_on:
       - api
-    # volumes:
-    #   - ./UI/nginx/certbot/conf:/etc/letsencrypt
-    #   - ./UI/nginx/certbot/www:/var/www/certbot
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /tmp/acme_challenge:/tmp/acme_challenge
 
   # ##############################
   # # Certbot Container

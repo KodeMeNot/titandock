@@ -4,7 +4,7 @@ services:
     build:
       context: ./main-frontend
       dockerfile: ./Dockerfile
-    image: "vishaltechnative/titandef:app0.2"
+    image: "vishaltechnative/titandef:app0.10"
     restart: always
     container_name: titanApp
     ports:
@@ -22,6 +22,6 @@ services:
     build:
       context: ./backend
       dockerfile: ./Dockerfile
-    image: "vishaltechnative/titandef:api0.2"
+    image: "vishaltechnative/titandef:api0.10"
     ports:
       - "9000:9000"

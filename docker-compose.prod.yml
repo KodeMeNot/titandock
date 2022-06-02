@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+  ##############################
+  # Backend Container
+  ##############################
+  api:
+    container_name: titanApi
+    restart: always
+    image: "vishaltechnative/titandef:api0.2"
+    ports:
+      - "9000:9000"
+
+  ##############################
+  # UI Container
+  ##############################
+  ui:
+    image: "vishaltechnative/titandef:app0.2"
+    restart: always
+    container_name: ui
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - api
+    # volumes:
+    #   - ./UI/nginx/certbot/conf:/etc/letsencrypt
+    #   - ./UI/nginx/certbot/www:/var/www/certbot
+
+  # ##############################
+  # # Certbot Container
+  # ##############################
+  # certbot:
+  #   image: certbot/certbot:latest
+  #   volumes:
+  #     - ./UI/nginx/certbot/conf:/etc/letsencrypt
+  #     - ./UI/nginx/certbot/www:/var/www/certbot

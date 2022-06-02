@@ -1,0 +1,27 @@
+version: "3.3"
+services:
+  ui:
+    build:
+      context: ./main-frontend
+      dockerfile: ./Dockerfile
+    image: "vishaltechnative/titandef:app0.2"
+    restart: always
+    container_name: titanApp
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - api
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /tmp/acme_challenge:/tmp/acme_challenge  
+  api:
+    # env_file: "./backend/.env"
+    container_name: titanApi
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    image: "vishaltechnative/titandef:api0.2"
+    ports:
+      - "9000:9000"

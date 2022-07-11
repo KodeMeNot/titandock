@@ -24,6 +24,7 @@ services:
     depends_on:
       - api
     volumes:
+      - letsencrypt:/etc/letsencrypt:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - /tmp/acme_challenge:/tmp/acme_challenge
 
@@ -35,3 +36,6 @@ services:
   #   volumes:
   #     - ./UI/nginx/certbot/conf:/etc/letsencrypt
   #     - ./UI/nginx/certbot/www:/var/www/certbot
+volumes:
+  letsencrypt:
+    name: letsencrypt_keys

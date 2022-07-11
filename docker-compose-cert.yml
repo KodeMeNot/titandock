@@ -10,3 +10,6 @@ services:
       - "/tmp/acme_challenge:/tmp/acme_challenge"
     environment:
       - TERM=xterm
+volumes:
+  letsencrypt:
+    name: letsencrypt_keys

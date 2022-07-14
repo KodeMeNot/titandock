@@ -24,10 +24,24 @@ services:
     depends_on:
       - api
     volumes:
-      - letsencrypt:/etc/letsencrypt
+      - /letsencrypt:/etc/letsencrypt
       #- /etc/letsencrypt:/etc/letsencrypt
       - /tmp/acme_challenge:/tmp/acme_challenge
-
+  #newRelic Agent
+  agent:
+    container_name: newrelic-infra
+    image: newrelic/infrastructure:latest
+    cap_add:
+      - SYS_PTRACE
+    network_mode: host
+    pid: host
+    privileged: true
+    volumes:
+      - "/:/host:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    environment:
+      NRIA_LICENSE_KEY: "a1237572758ce7656d1ff8140559d131c915NRAL"
+    restart: unless-stopped
   # ##############################
   # # Certbot Container
   # ##############################
@@ -36,4 +50,3 @@ services:
   #   volumes:
   #     - ./UI/nginx/certbot/conf:/etc/letsencrypt
   #     - ./UI/nginx/certbot/www:/var/www/certbot
-  

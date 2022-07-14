@@ -24,7 +24,7 @@ services:
     depends_on:
       - api
     volumes:
-      - /letsencrypt:/etc/letsencrypt
+      - /etc/letsencrypt:/etc/letsencrypt
       #- /etc/letsencrypt:/etc/letsencrypt
       - /tmp/acme_challenge:/tmp/acme_challenge
   #newRelic Agent
